@@ -1,26 +1,32 @@
+# OpenSCAD SVG-to-STL Project .gitignore
+
 # OpenSCAD temporary files
 *.csg
 *.deps
 *.echo
-*.stl
-*.gcode
 
-# SVG temporary files
-*.svg.bak
-*.svg~
-*.svg.tmp
+# OpenSCAD output files (consider uncommenting if you want to track these)
+# *.stl
+# *.gcode
 
-# PowerShell temporary files
+# SVG processing files
+svg_intermediate/*.svg
+png_intermediate/*.png
+png_intermediate/*.pbm
+svg_final/*_traced.svg
+
+# Keep output directory structure but ignore contents
+stl_output/*
+!stl_output/.gitkeep
+scad_files/*
+!scad_files/.gitkeep
+
+# Script backups/temporary files
 *.ps1.bak
 *.ps1~
-*.ps1.tmp
-*.psm1.bak
-*.psd1.bak
-
-# Bash script temporary files
 *.sh.bak
 *.sh~
-*.sh.tmp
+*.tmp
 
 # Editor/IDE specific files
 .vscode/
@@ -37,3 +43,6 @@ desktop.ini
 build/
 out/
 dist/
+
+# Keep empty directories with .gitkeep
+!*/
