@@ -1,0 +1,39 @@
+# OpenSCAD temporary files
+*.csg
+*.deps
+*.echo
+*.stl
+*.gcode
+
+# SVG temporary files
+*.svg.bak
+*.svg~
+*.svg.tmp
+
+# PowerShell temporary files
+*.ps1.bak
+*.ps1~
+*.ps1.tmp
+*.psm1.bak
+*.psd1.bak
+
+# Bash script temporary files
+*.sh.bak
+*.sh~
+*.sh.tmp
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build directories
+build/
+out/
+dist/
