@@ -1,100 +1,131 @@
-# SVG to STL Converter
+# README
 
-A toolset for converting SVG files to 3D-printable STL models with automatic plinth generation using OpenSCAD. Works on both Windows (PowerShell) and Linux (Bash) systems.
+# 3D Printed Objects for Teaching Screen Layouts
 
-## Features
+When teaching students who are blind or visually impaired to use screen readers, one of the challenges is helping them understand the layout of a computer screen. While screen readers provide auditory feedback, having a tactile representation of the screen can significantly enhance comprehension and navigation skills. Unfortunately, well-meaning sighted colleagues and students often point to the screen and say something like, "Just go to the link on the top left", which can be confusing without a clear mental model of the screen's layout.
 
-- Complete conversion pipeline from SVG to 3D-printable STL
-- Automatic plinth generation with customizable dimensions
-- Uniform scaling to ensure consistent output size
-- Intermediate file handling for reliable conversion
-- Support for both Windows and Linux environments
+As a way to address this, I have created a set of 3D printable objects that represent different screen layouts that student commonly encounter during their school day. These tactile models be used in conjunction with screen readers to help students visualize and understand the structure of a computer screen. This is done by students exploring the tactile object as they listen to the screen reader's output, allowing them to correlate the auditory information with a physical representation. This hands-on approach can make it easier for students to grasp concepts like navigation, focus, and the arrangement of elements on a screen, enhancing their overall learning experience. This is also useful for sighted teachers who may not be familiar with screen reader layouts.
 
-## Requirements
+## Available 3D Models
 
-### Windows Requirements
-- PowerShell
-- [OpenSCAD](https://openscad.org/) (installed at default location or update path in script)
-- [Inkscape](https://inkscape.org/) (installed at default location or update path in script)
-- [ImageMagick](https://imagemagick.org/) (accessible in PATH as `magick`)
-- [Potrace](http://potrace.sourceforge.net/) (accessible in PATH)
+All of these models are available for free download and can be printed using a standard 3D printer with a >200 mm x 200 mm print surface. The files are provided in STL format, which is widely supported by 3D printing software.  [This link downloads a .zip file of the software](https://github.com/mrhunsaker/ScreenReaderTactileGraphics/archive/refs/heads/main.zip). You can see the entire GitHub Repo to file issues [here](https://github.com/mrhunsaker/ScreenReaderTactileGraphics)
 
-### Linux Requirements
-- Bash
-- [OpenSCAD](https://openscad.org/) (installed via Flatpak or update path in script)
-- [Inkscape](https://inkscape.org/) (installed via Flatpak or update path in script)
-- [ImageMagick](https://imagemagick.org/) (`convert` command)
-- [Potrace](http://potrace.sourceforge.net/)
+When you download the zipped folder of these models, the files that you import into a slicer like BambuStudio, OrcaSlicer, or PrusaSlicer are located in the "Final3dPrintFiles" folder. The other folders contain the original svg files created in Inkscape and OpenSCAD files used to generate the stl 3d print files. There is also a Pdf folder containing an embossable version of the models for those who do not have access to a 3D printer.
 
-## Directory Structure
+### Available models (as of October 2025):
 
-The scripts expect and create the following directory structure:
+- CavasDashboard.stl
+- CavasModules.stl
+- Copilot365Online.stl
+- Desktop.stl
+- DesktopAltTab.stl
+- DesktopCopilot.stl
+- DesktopStartMenu.stl
+- ExcelOnline.stl
+- FileExplorerDetails.stl
+- FileExplorerIcons.stl
+- GMailOnline.stl
+- GoogleDocOnline.stl
+- GoogleHome.stl
+- GoogleResults.stl
+- GoogleSheetsOnline.stl
+- GoogleSlidesOnline.stl
+- OfficeSplashPage.stl
+- OutlookOnline.stl
+- PPTOnline.stl
+- WebsiteWithHeadings.stl
+- WordOnline.stl
 
-```
-[Parent Directory]
- ├── svg_intermediate/    # Initial SVG files
- ├── png_intermediate/    # Temporary PNG files
- ├── svg_final/           # Traced SVG files
- ├── scad_files/          # Generated OpenSCAD files
- └── stl_output/          # Final STL files for 3D printing
-```
+### Printing Instructions
 
-## Scripts
+These models are designed to be printed flat. Attempts to print them upright resulted in extremely poor quality prints. The models can be printed using PLA or PETG filament, which are both commonly used materials for 3D printing.  
 
-### Windows: `svg_to_stl.ps1`
+I printed these models using a BambuLab P1S printer with a 0.4 mm nozzle. All print settings in Bambu Studio were left at the program defaults except I changed the PLA filament source from Bambu PLA to be Generic PLA (I use Filastruder PLA+ filament because it fit my price point). Elegoo PLA filament also worked well.
 
-PowerShell script for Windows users.
+## How to Customize this Resource
 
-1. Configure paths at the top of the script
-2. Place SVG files in the `svg_intermediate` directory
-3. Run the script in PowerShell:
-   ```powershell
-   .\svg_to_stl.ps1
-   ```
+If you have access to a 3D printer and are familiar with 3D modeling software, you can customize these models to better suit your specific needs. The original design files are included in the download package, allowing you to modify dimensions, add or remove features, or create entirely new layouts based on the provided templates.
 
-### Linux: `svg_to_stl.sh`
+The main design files are created using OpenSCAD, a free and open-source software for creating 3D CAD models. The vector graphics used in the designs were created using Inkscape, which is also free and open-source. Both of these tools have active communities and plenty of tutorials available online to help you get started.
 
-Bash script for Linux users.
+Here are the steps I recommend for customizing the models:
 
-1. Configure paths at the top of the script
-2. Place SVG files in the `svg_intermediate` directory
-3. Make the script executable and run:
-   ```bash
-   chmod +x svg_to_stl.sh
-   ./svg_to_stl.sh
-   ```
+- Install OpenSCAD and Inkscape on your computer.
 
-## Workflow
+- Open the .svg files and modify them as needed using Inkscape.
 
-1. SVG → PNG: Converts SVG files to PNG using Inkscape
-2. PNG → PBM → SVG: Processes PNG files through ImageMagick and Potrace to create clean, traceable SVGs
-3. SVG → SCAD: Generates OpenSCAD files with automatic plinth sizing and uniform scaling
-4. SCAD → STL: Renders the final 3D models as STL files suitable for 3D printing
+  - All of my application based models are Office365 or Google Docs, so the browser tabs and search bar are present. This means these componsents are present for use in other application models. 
+  - If you want to remove these components, you can delete them from the .svg files.
 
-## Customization
+- Save the svg file after making changes. I save them to a folder names svg_intermediate_files to keep them separate from the final files I will create.
 
-You can modify the following parameters in the scripts:
+- Export the svg file you just saves as a png file from Inkscape. I use a resolution of 300 dpi.
 
-- `$parentFolder`/`PARENT_FOLDER`: Base directory for all operations
-- `$plinthHeight`/`PLINTH_HEIGHT`: Height of the base in mm (default: 2)
-- `$extrudeHeight`/`EXTRUDE_HEIGHT`: Height of the extruded SVG in mm (default: 1)
-- `$maxDimension`/`MAX_DIMENSION`: Maximum dimension for uniform scaling in mm (default: 200)
+- Open the png file in Inkscape and do the following:
 
-## Notes
+  - Go along the top menu and select Path -> Trace Bitmap.
+  - In the Trace Bitmap window, select "Brightness cutoff" and set the threshold to 0.500. Click OK.
+  - Delete the original png image from the Inkscape window, leaving only the traced vector image.
+  - Save the image as a plain svg file. I save these files to a folder named svg_final_files.
 
-- Make sure all required tools are installed and accessible in your PATH
-- The Windows script includes a px-to-mm conversion factor that may need adjustment based on your SVG export settings
-- For large SVG files, the process may take some time, especially during the OpenSCAD rendering step
+- Open the ScreenReaderVisualizationsOverall.scad file in OpenSCAD.
 
-## .gitignore
+  - In OpenSCAD, find a line like this and copy it, and paste right after the `}` and before the next `elseif`:
 
-This repository includes a `.gitignore` file configured for:
-- OpenSCAD temporary files
-- SVG/PNG intermediate files
-- PowerShell and Bash script backups
-- Common editor/IDE temporary files
-- Build outputs
+    ```openscad
+    else if (design == "CavasModules") {
+    translate([-15, -15, 1.75])
+    color(c="yellow") {
+        linear_extrude(height=1.25)
+            import("../svg_final/CanvasModules_traced.svg");
+    }
+    }
+    ```
 
-## License
+    becomes
 
-[APACHE 2.0](LICENSE)
+    ```openscad
+    else if (design == "CavasModules") {
+    translate([-15, -15, 1.75])
+    color(c="yellow") {
+        linear_extrude(height=1.25)
+            import("../svg_final/CanvasModules_traced.svg");
+    }
+    }
+    ```openscad
+    else if (design == "MYNEWDESIGN") {
+    translate([-15, -15, 1.75])
+    color(c="yellow") {
+        linear_extrude(height=1.25)
+            import("../svg_final/MYNEWDESIGN.svg");
+    }
+    }
+    else if ...
+    ```
+
+  - Change `MYNEWDESIGN` to the name of your new design. Make sure it matches the name you will use when you export the stl file.
+
+  - If you go to the top of the file where is says this: 
+
+    ```openscad
+    // Universal 3D Print Generator
+    // Choose which design to render by changing the 'design' parameter
+    // DESIGN SELECTOR - Change this value to select which design to render
+    design = "CavasDashboard"; // [CavasDashboard, CavasModules, Copilot365Online, desktop, desktopStartMenu, desktopAltTab, desktopCopilot, ExcelOnline, FileExplorerDetails, FileExplorerIcons, GMailOnline, GoogleDocOnline, GoogleHome, GoogleResults, GoogleSheetsOnline, GoogleSlidesOnline, OfficeSplashPage, OutlookOnline, PPTOnline, WebsiteWithHeadings, WordOnline]
+    ```
+
+  - Add your new design name to the list of options in the comment and change the value of `design` to be your new design name. For example:
+
+    ```openscad
+    // Universal 3D Print Generator
+    // Choose which design to render by changing the 'design' parameter
+    
+    // DESIGN SELECTOR - Change this value to select which design to render
+    design = "CavasDashboard"; // [CavasDashboard, CavasModules, Copilot365Online, desktop, desktopStartMenu, desktopAltTab, desktopCopilot, ExcelOnline, FileExplorerDetails, FileExplorerIcons, GMailOnline, GoogleDocOnline, GoogleHome, GoogleResults, GoogleSheetsOnline, GoogleSlidesOnline, OfficeSplashPage, OutlookOnline, PPTOnline, WebsiteWithHeadings, WordOnline, MYNEWDESIGN]
+    ```
+
+- The cutomizer on the right of the screen will let you choose your new design from the dropdown menu.
+
+- Click the Render button (or press F6) to generate the 3D model.Press F6 to render the model
+
+- Once the model is rendered, press F7 STL to save the 3D model file. Name the file according to your design (e.g., MYNEWDESIGN.stl) and save it in the Final3dPrintFiles folder.

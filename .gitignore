@@ -43,6 +43,7 @@ desktop.ini
 build/
 out/
 dist/
+*.ps1
 
 # Keep empty directories with .gitkeep
 !*/
